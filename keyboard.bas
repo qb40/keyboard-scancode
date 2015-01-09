@@ -1,29 +1,20 @@
 DECLARE FUNCTION bin1$ (a%)
 DECLARE FUNCTION bin& (a%)
 'maxkeys per second = 857 INP(&H60) command
-'bit7=0 then the following key is kept pressed
-'bit7=1 the pressed button is released
-'byte=224 special key pressed,keycode
 
 CLS
-k1% = 0
-k1$ = ""
+OPEN "O", #1, "test.log"
 DO
 k% = INP(&H60)            'recieve key from buffer
-IF (k% <> k1%) THEN
-k1% = k%
-k1$ = k1$ + STR$(k1%) + STR$(bin&(k1%))
-LOCATE 1, 1
-PRINT k1$
-END IF
-'PRINT k%, bin1$(k%); "b" 'Print keycode, binary code
-
+PRINT k%, bin1$(k%); "b" 'Print keycode, binary code
+PRINT #1, k%, bin1$(k%); "b"
 
 DEF SEG = 0               'stop beep sound
 POKE &H41A, PEEK(&H41C)   '(by clearing keyboard buffer)
 DEF SEG                   '(Qbasic tip)
-
+IF (k% = 129) THEN EXIT DO
 LOOP
+CLOSE #1
 
 FUNCTION bin& (a%)
 b& = 0
