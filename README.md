@@ -12,8 +12,7 @@ Special keys , such as the arrow keys, use extended scan codes, where the return
 value from keyboard io port is first `E0h` to indicate that it is an extended
 scancode, and the scancode value is read out.
 
-
-## demo
+<br>
 
 <img src="https://raw.githubusercontent.com/qb40/keyscancode/gh-pages/0/image/0.png" width="70%"><br/>
 Scancode of `Enter` key pressed and released in *decimal*, *hex* & *binary*.<br/>
